@@ -20,23 +20,24 @@ fields = {
     '今後の運営方針': ''
 }
 
+inputs = {}
 for field in fields:
-    fields[field] = st.text_input(field)
+    inputs[field] = st.text_input(field)
 
 if st.button('事業計画書を生成'):
-    # 入力内容をGPTに渡す
-    input_text = '\n'.join([f'{key}: {value}' for key, value in fields.items()])
-    
-    # 最新のOpenAI APIを使用
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "あなたは事業計画書を作成するアシスタントです。"},
-            {"role": "user", "content": input_text}
-        ]
-    )
+    input_text = '\n'.join([f'{key}: {value}' for key, value in inputs.items()])
 
-    # GPTの出力を表示
-    st.subheader('事業計画書')
-    st.write(response.choices[0].message['content'])
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": input_text}
+            ]
+        )
+
+        st.subheader('事業計画書')
+        st.write(response['choices'][0]['message']['content'])
+    except Exception as e:
+        st.error(f"エラーが発生しました: {e}")
     
