@@ -1,6 +1,4 @@
-!pip install streamlit
 import streamlit as st
-!pip install openai
 import openai
 
 # OpenAIのAPIキーを設定します
