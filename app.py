@@ -1,8 +1,10 @@
+!pip install streamlit
 import streamlit as st
+!pip install openai
 import openai
 
 # OpenAIのAPIキーを設定します
-openai.api_key = 'YOUR_OPENAI_API_KEY'
+openai.api_key = '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'
 
 st.title('事業計画書作成アプリ')
 
@@ -40,4 +42,5 @@ if st.button('事業計画書を生成'):
         st.write(response['choices'][0]['message']['content'])
     except Exception as e:
         st.error(f"エラーが発生しました: {e}")
-    
+
+   
